@@ -258,7 +258,7 @@ export default function ExpandWorkforce() {
                 onClick={() => setStartIdx(idx)}
                 className={`transition-all duration-300 rounded-full ${
                   idx === startIdx
-                    ? "bg-blue-500 w-6 h-1.5"
+                    ? "bg-red-500 w-6 h-1.5"
                     : "bg-neutral-300 w-3 h-1.5"
                 }`}
                 style={{

@@ -41,16 +41,16 @@ export default function Navbar() {
         >
           {/* Links group: slightly larger text, reduced gaps */}
           <div className="flex items-center gap-5 text-lg text-neutral-950">
-            <a href="#home" className="hover:bg-black hover:text-white px-3 py-1 rounded transition">
+            <a href="#home" className="hover:bg-red-500 hover:text-white px-3 py-1 rounded transition">
               Home
             </a>
-            <a href="#services" className="hover:bg-black hover:text-white px-3 py-1 rounded transition">
+            <a href="#services" className="hover:bg-red-500 hover:text-white px-3 py-1 rounded transition">
               Services  
             </a>
-            <a href="#careers" className="hover:bg-black hover:text-white px-3 py-1 rounded transition">
+            <a href="#careers" className="hover:bg-red-500 hover:text-white px-3 py-1 rounded transition">
               Careers 
             </a>
-            <a href="#about" className="hover:bg-black hover:text-white px-3 py-1 rounded transition">
+            <a href="#about" className="hover:bg-red-500 hover:text-white px-3 py-1 rounded transition">
               About Us
             </a>
           </div>
@@ -64,7 +64,7 @@ export default function Navbar() {
           {/* CTA placed together with the links */}
           <a
             href="#get-started"
-            className="inline-flex items-center rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            className="inline-flex items-center rounded-full bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             Get Started
             <ArrowUpRight className="text-neutral-950" />

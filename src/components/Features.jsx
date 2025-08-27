@@ -40,32 +40,32 @@ const slides = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     pills: [
       [
-        { name: "Floyd Miles", role: "SEO Specialist", fade: "opacity-60" },
-        { name: "Brooklyn Simmons", role: "Barone LLC.", fade: "opacity-80" },
-        { name: "Eleanor Pena", role: "Marketing Coord.", fade: "opacity-90" },
+        { name: "Floyd Miles", role: "Psychology Specialist", fade: "opacity-60" },
+        { name: "Brooklyn Simmons", role: "Pediatric Nurse", fade: "opacity-80" },
+        { name: "Eleanor Pena", role: "ICU Nurse.", fade: "opacity-90" },
         { name: "Savannah Nguyen", role: "Medical Assistant", fade: "opacity-100" },
       ],
       [
-        { name: "Kristin Watson", role: "Acme Co.", fade: "opacity-60" },
-        { name: "Ronald Richards", role: "Abstargo Ltd", fade: "opacity-80" },
-        { name: "Esther Howard", role: "President of Sales", fade: "opacity-90" },
-        { name: "Courtney Henry", role: "Biffco Enterprises Ltd.", fade: "opacity-100" },
+        { name: "Kristin Watson", role: "Trauma Nurse", fade: "opacity-60" },
+        { name: "Ronald Richards", role: "Obstetrician", fade: "opacity-80" },
+        { name: "Esther Howard", role: "Physiotherapist", fade: "opacity-90" },
+        { name: "Courtney Henry", role: "General Practice", fade: "opacity-100" },
       ],
     ],
     button: {
-      text: "Job Opportunities",
-      style: "bg-white/60 px-4 py-1 text-xs font-semibold text-neutral-700 shadow hover:bg-white/80 border border-neutral-300 backdrop-blur rounded-full",
+      text: "Plan your care",
+      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-neutral-700 shadow hover:bg-white/80 border border-neutral-300 backdrop-blur rounded-full",
     },
     pillsSide: true,
     bgImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
   },
   {
-    title: "Empower your HR team.",
-    description: "Manage employee data, performance reviews, and onboarding with ease and efficiency.",
+    title: "Start your journey",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     pills: null,
     button: {
-      text: "HR Dashboard",
-      style: "bg-blue-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-blue-600 border border-blue-700 backdrop-blur rounded-full",
+      text: "Become a caregiver",
+      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-red-600 border border-red-700 backdrop-blur rounded-full",
     },
     pillsSide: false,
     photo: {
@@ -83,7 +83,7 @@ const slides = [
     pills: null,
     button: {
       text: "Browse Equipment",
-      style: "bg-green-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-green-600 border border-green-700 backdrop-blur rounded-full",
+      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-red-600 border border-red-700 backdrop-blur rounded-full",
     },
     pillsSide: false,
     photo: {
@@ -253,7 +253,7 @@ export default function Features() {
                 key={idx}
                 className={`transition-all duration-300 rounded-full ${
                   idx === current
-                    ? "bg-blue-500 w-3 h-0.5"
+                    ? "bg-red-500 w-3 h-0.5"
                     : "bg-neutral-300 w-1.5 h-0.5"
                 }`}
                 style={{

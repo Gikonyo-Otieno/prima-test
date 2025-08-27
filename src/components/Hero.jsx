@@ -41,7 +41,7 @@ export default function Hero() {
       <div className="mx-auto flex max-w-4xl flex-col items-center px-6 pt-28 pb-28 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-neutral-950 sm:text-5xl md:text-6xl">
           <span className="block">Karibu </span>
-          <span className="text-blue-500">Prima</span> healthcare
+          <span className="text-red-700">Prima</span> healthcare
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-950">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -51,7 +51,7 @@ export default function Hero() {
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
           <a
             href="#get-started"
-            className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            className="inline-flex items-center justify-center rounded-full bg-red-700 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             Get Started
             <ArrowUpRight className="text-neutral-950" />

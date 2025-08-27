@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 import CardPanel from "../components/CardPanel";
 import Footer from "../components/Footer";
+import ChooseCarer from "../components/ChooseCarer";
 
 export default function Services() {
   return (
@@ -22,6 +23,7 @@ export default function Services() {
         </div>
         <CardPanel />
       </div>
+      <ChooseCarer />
       <Footer />
     </section>
   );

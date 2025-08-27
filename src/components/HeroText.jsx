@@ -8,7 +8,7 @@ export default function HeroText() {
           letterSpacing: "0.01em",
         }}
       >
-        The help you Need, When <br /> you Need it.
+        The help you Need,  <br /> When you Need it.
       </h1>
       <div className="w-24 h-1 bg-white/70 rounded-full mt-6" />
     </div>
