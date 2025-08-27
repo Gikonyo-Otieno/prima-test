@@ -50,7 +50,7 @@ export default function Hero() {
         {/* CTAs with angled up-right arrows */}
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
           <a
-            href="#start-trial"
+            href="#get-started"
             className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             Get Started
