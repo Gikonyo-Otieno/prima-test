@@ -20,50 +20,56 @@ function ArrowUpRight({ className = "" }) {
 
 export default function ExpandWorkforce() {
   return (
-    <section className="w-full flex flex-row bg-white min-h-[400px] font-sans">
+    <section className="w-screen h-screen flex flex-row bg-white font-sans overflow-hidden">
       {/* Main content */}
-      <div className="flex-1 flex flex-col px-12 py-10 bg-white">
+      <div className="flex-1 flex flex-col px-12 py-10 bg-white min-h-0 min-w-0">
         <h1 className="text-5xl font-bold mb-2 leading-tight tracking-tight" style={{ fontFamily: "inherit" }}>
           Quickly find your <br /> Medical partner.
         </h1>
         <p className="text-neutral-700 mb-8 text-base max-w-xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <div className="flex flex-row gap-6">
-          {/* Nurses Card */}
-          <div className="bg-neutral-100 rounded-2xl p-6 flex flex-col items-start min-w-[210px] shadow" style={{ height: "210px" }}>
-            <span className="text-sm font-medium mb-2">Nurses</span>
-            <div className="flex flex-row gap-1 mb-3">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" className="w-8 h-8 rounded-full" />
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar" className="w-8 h-8 rounded-full" />
-              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="avatar" className="w-8 h-8 rounded-full" />
+        <div className="flex flex-row gap-8">
+          {/* Employees Card */}
+          <div className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end bg-neutral-100" style={{ height: "220px" }}>
+            <div className="absolute inset-0 bg-neutral-300 rounded-[24px]"></div>
+            <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">Patients</span>
+            <div className="relative z-10 px-6 pb-6">
+              <div className="flex flex-row gap-2 mb-4">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+              </div>
+              <div className="text-lg font-semibold mb-2 text-neutral-900">Find a Nurse</div>
+              <button className="rounded-full bg-white/80 px-3 py-2 text-base font-semibold text-neutral-700 shadow flex items-center">
+                <ArrowUpRight />
+              </button>
             </div>
-            <div className="text-base font-semibold mb-1">Hire a Nurse</div>
-            <button className="mt-auto rounded-full bg-white px-2 py-1 text-xs font-semibold text-neutral-700 shadow border border-neutral-300 flex items-center self-end">
-              <ArrowUpRight />
-            </button>
           </div>
-          {/* Patient Card */}
-          <div className="bg-neutral-300 rounded-2xl p-6 flex flex-col items-start min-w-[210px] shadow relative" style={{ height: "210px" }}>
-            <span className="absolute top-4 left-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">Patient</span>
-            <div className="mb-3 mt-2 self-center">
-              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="avatar" className="w-16 h-16 rounded-xl object-cover" />
+          {/* Contractor Card */}
+          <div className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end" style={{ height: "220px" }}>
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&h=220&facepad=2" alt="contractor" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/30 rounded-[24px]"></div>
+            <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">Nurses</span>
+            <div className="relative z-10 px-6 pb-6">
+              <div className="flex flex-row gap-2 mb-4">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+              </div>
+              <div className="text-lg font-semibold text-white mb-2">Find a Patient</div>
+              <button className="rounded-full bg-white/30 px-3 py-2 text-base font-semibold text-white shadow flex items-center">
+                <ArrowUpRight className="text-white" />
+              </button>
             </div>
-            <div className="text-base font-semibold mb-1">Find a Patient</div>
-            <button className="mt-auto rounded-full bg-black text-white px-2 py-1 text-xs font-semibold shadow flex items-center self-end">
-              <ArrowUpRight />
-            </button>
-          </div>
-          {/* Arrow Button */}
-          <div className="flex flex-col justify-end items-center" style={{ height: "210px" }}>
-            <button className="rounded-full bg-black text-white px-3 py-2 shadow">
-              <ArrowUpRight />
-            </button>
           </div>
         </div>
       </div>
       {/* Right cards */}
-      <div className="flex flex-row gap-8 items-center bg-white px-0 py-10 min-w-[540px]">
+      <div
+        className="flex flex-row gap-8 items-center bg-white px-0 py-10 min-h-0 overflow-x-auto"
+        style={{ width: "740px" }} // Shows 2.5 cards, adjust as needed
+      >
         {/* Card 1 */}
         <div className="bg-neutral-300 rounded-2xl p-6 flex flex-col min-w-[270px] max-w-[270px] shadow relative" style={{ height: "290px" }}>
           <span className="absolute top-4 left-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
