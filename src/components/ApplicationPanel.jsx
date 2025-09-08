@@ -1,12 +1,17 @@
 import { useState } from "react";
 
+// ----------------- Application Form -----------------
 function ApplicationForm({ role }) {
+  const [workHours, setWorkHours] = useState("");
+  const [customHours, setCustomHours] = useState("");
+
   return (
     <form className="bg-white/80 rounded-xl shadow flex flex-col p-6 min-w-[320px] max-w-[360px] mx-1 transition-all duration-300 border border-neutral-200 text-left">
       <h3 className="text-lg font-bold text-neutral-900 mb-4">
         Apply to Become a {role}
       </h3>
 
+      {/* Full Name */}
       <label className="text-sm font-medium text-neutral-700 mb-1">Full Name</label>
       <input
         type="text"
@@ -14,6 +19,7 @@ function ApplicationForm({ role }) {
         className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
       />
 
+      {/* Age */}
       <label className="text-sm font-medium text-neutral-700 mb-1">Age</label>
       <input
         type="number"
@@ -21,7 +27,8 @@ function ApplicationForm({ role }) {
         className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
       />
 
-      <label className="text-sm font-medium text-neutral-700 mb-1">Sex</label>
+      {/* Gender */}
+      <label className="text-sm font-medium text-neutral-700 mb-1">Gender</label>
       <select className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400">
         <option value="">Select</option>
         <option value="female">Female</option>
@@ -29,6 +36,7 @@ function ApplicationForm({ role }) {
         <option value="other">Other / Prefer not to say</option>
       </select>
 
+      {/* Area of Expertise */}
       <label className="text-sm font-medium text-neutral-700 mb-1">Area of Expertise</label>
       <input
         type="text"
@@ -36,13 +44,30 @@ function ApplicationForm({ role }) {
         className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
       />
 
-      <label className="text-sm font-medium text-neutral-700 mb-1">Area of Interest</label>
-      <input
-        type="text"
-        placeholder="e.g. Home Care, Community Health"
+      {/* Preferred Work Hours (Dropdown + Conditional Input) */}
+      <label className="text-sm font-medium text-neutral-700 mb-1">Preferred Work Hours</label>
+      <select
+        value={workHours}
+        onChange={(e) => setWorkHours(e.target.value)}
         className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
-      />
+      >
+        <option value="">Select an option</option>
+        <option value="fulltime">Full-time (24 hrs)</option>
+        <option value="parttime">Part-time (12 hrs)</option>
+        <option value="other">Other</option>
+      </select>
 
+      {workHours === "other" && (
+        <input
+          type="text"
+          value={customHours}
+          onChange={(e) => setCustomHours(e.target.value)}
+          placeholder="Enter preferred hours"
+          className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
+        />
+      )}
+
+      {/* Contact Info */}
       <label className="text-sm font-medium text-neutral-700 mb-1">Contact Information</label>
       <input
         type="email"
@@ -55,11 +80,13 @@ function ApplicationForm({ role }) {
         className="mb-3 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
       />
 
+      {/* Info Text */}
       <p className="text-xs text-neutral-500 mb-4">
         After submission, our recruitment team will review your application and contact you
         with next steps if selected.
       </p>
 
+      {/* Submit Button */}
       <button
         type="submit"
         className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg text-sm shadow"
@@ -70,6 +97,7 @@ function ApplicationForm({ role }) {
   );
 }
 
+// ----------------- Application Panel -----------------
 export default function ApplicationPanel() {
   const [activeTab, setActiveTab] = useState("caregiver");
 
@@ -106,7 +134,8 @@ export default function ApplicationPanel() {
       <div className="absolute inset-0 rounded-[32px] bg-white/30 backdrop-blur-md"></div>
 
       {/* Foreground Content */}
-      <div className="relative rounded-[32px] shadow-xl flex flex-col px-12 pt-8 pb-6"
+      <div
+        className="relative rounded-[32px] shadow-xl flex flex-col px-12 pt-8 pb-6"
         style={{
           border: "1px solid rgba(200,200,210,0.25)",
         }}
