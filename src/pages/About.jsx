@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import WhoWeAre from "../components/WhoWeAre";
 import WhatWeDo from "../components/WhatWeDo";
 import Partners from "../components/Partners";
@@ -7,8 +5,7 @@ import Partners from "../components/Partners";
 export default function About() {
   return (
     <main className="min-h-screen bg-white relative">
-      {/* Navbar */}
-      <Navbar />
+
       <div style={{ paddingTop: "3rem" }} className="w-full" />
 
       {/* Background image + overlay */}
@@ -28,8 +25,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Footer */}
-      <Footer />
     </main>
   );
 }

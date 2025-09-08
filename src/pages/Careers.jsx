@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import CareerHero from "../components/CareerHero";
 import ApplicationPanel from "../components/ApplicationPanel";
 
@@ -7,7 +5,7 @@ export default function Careers() {
   return (
     <main className="min-h-screen bg-white relative">
       {/* Transparent navbar layered above the hero */}
-      <Navbar />
+      
       <div style={{ paddingTop: "3rem" }} className="w-full" />
 
       {/* Background card with image, overlay, rounded edges */}
@@ -28,7 +26,7 @@ export default function Careers() {
         </div>
       </div>
 
-      <Footer />
+      
     </main>
   );
 }

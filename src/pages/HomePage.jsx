@@ -1,25 +1,29 @@
-import Navbar from "../components/Navbar";
+
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import ExpandWorkforce from "../components/ExpandWorkforce";
-import Footer from "../components/Footer";
+import Carousel from "../components/Carousel";
 
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white relative">
-      {/* Transparent navbar layered above the hero */}
-      <Navbar />
+    <main className="min-h-screen bg-white relative pt-12" >
 
+
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+        <Carousel />
+      </div>
       {/* Hero with dark smoky background */}
+      
       <Hero />
 
       {/* Overlapping feature panel */}
       <Features />
       <ExpandWorkforce />
       
+      
 
-      <Footer />
+  
 
     </main>
   );

@@ -1,13 +1,11 @@
-import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 import CardPanel from "../components/CardPanel";
-import Footer from "../components/Footer";
 import ChooseCarer from "../components/ChooseCarer";
 
 export default function Services() {
   return (
     <section className="min-h-screen w-full flex flex-col justify-center items-center bg-neutral-100">
-      <Navbar />
+      
       {/* Add padding below navbar */}
       <div style={{ paddingTop: "3rem" }} className="w-full" />
       {/* Background card with image, overlay, rounded edges */}
@@ -24,7 +22,7 @@ export default function Services() {
         <CardPanel />
       </div>
       <ChooseCarer />
-      <Footer />
+      
     </section>
   );
 }
