@@ -38,6 +38,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
+      
       <div className="mx-auto flex max-w-4xl flex-col items-center px-6 pt-28 pb-28 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-neutral-950 sm:text-5xl md:text-6xl">
           <span className="block">Karibu </span>
