@@ -71,7 +71,7 @@ export default function Navbar() {
 
           <Link
             to="/get-started"
-            className="inline-flex items-center rounded-full bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            className="inline-flex items-center rounded-full bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             Get Started
             <ArrowUpRight className="text-neutral-950" />
