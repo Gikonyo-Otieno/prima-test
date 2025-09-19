@@ -18,12 +18,12 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return <LoadingScreen />; // show only logo animation
+    return <LoadingScreen />; 
   }
 
   return (
     <BrowserRouter>
-      {/* Navbar is outside Routes so it shows on every page */}
+      
       <Navbar />
 
       <Routes>

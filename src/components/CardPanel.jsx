@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
-// --- Team Card (Our Team stays the same) ---
 function TeamCard({ name, location, role, img }) {
   return (
-    <div className="bg-white/80 rounded-xl shadow flex flex-col items-center p-4 min-w-[180px] max-w-[180px] mx-1 transition-all duration-300 border border-neutral-200">
+    <div className="bg-white/80 rounded-xl shadow flex flex-col items-center p-4 min-w-[180px] max-w-[180px] mx-1 border border-neutral-200">
       <img src={img} alt={name} className="w-14 h-14 rounded-full object-cover mb-2" />
       <div className="text-sm font-semibold text-neutral-900 mb-1">{name}</div>
       <div className="text-xs text-neutral-500 mb-1">{location}</div>
@@ -16,10 +16,9 @@ function TeamCard({ name, location, role, img }) {
   );
 }
 
-// --- Info Card (Support + Equipment tabs) ---
 function InfoCard({ title, description, contact }) {
   return (
-    <div className="bg-white/80 rounded-xl shadow flex flex-col items-center justify-center p-6 min-w-[280px] max-w-[320px] mx-1 transition-all duration-300 border border-neutral-200 text-center">
+    <div className="bg-white/80 rounded-xl shadow flex flex-col items-center justify-center p-6 min-w-[280px] max-w-[320px] mx-1 border border-neutral-200 text-center">
       <h3 className="text-lg font-bold text-neutral-900 mb-3">{title}</h3>
       <p className="text-sm text-neutral-700 mb-4">{description}</p>
       <div className="text-sm text-neutral-800 font-medium">{contact}</div>
@@ -28,9 +27,10 @@ function InfoCard({ title, description, contact }) {
 }
 
 export default function CardPanel() {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("team");
+  const panelRef = useRef(null);
 
-  // right panel text for each tab
   const contentMap = {
     team: {
       heading: "Care close to you",
@@ -49,8 +49,19 @@ export default function CardPanel() {
     },
   };
 
+  // Watch the URL hash
+  useEffect(() => {
+    if (location.hash === "#customer-support") {
+      setActiveTab("support");
+      requestAnimationFrame(() => {
+        panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, [location.hash]);
+
   return (
     <div
+      ref={panelRef}
       className="relative w-full max-w-5xl rounded-[32px] shadow-xl flex flex-col px-12 pt-8 pb-6 mx-auto"
       style={{
         background: "linear-gradient(90deg, rgba(245,246,250,0.53) 60%, rgba(220,221,225,0.43) 100%)",
@@ -65,9 +76,7 @@ export default function CardPanel() {
         <button
           onClick={() => setActiveTab("team")}
           className={`px-5 py-2 rounded-full font-semibold text-base shadow ${
-            activeTab === "team"
-              ? "bg-neutral-200 text-neutral-900"
-              : "text-neutral-700 font-medium"
+            activeTab === "team" ? "bg-neutral-200 text-neutral-900" : "text-neutral-700 font-medium"
           }`}
         >
           Our Team
@@ -75,28 +84,24 @@ export default function CardPanel() {
         <button
           onClick={() => setActiveTab("support")}
           className={`px-5 py-2 rounded-full font-semibold text-base shadow ${
-            activeTab === "support"
-              ? "bg-neutral-200 text-neutral-900"
-              : "text-neutral-700 font-medium"
+            activeTab === "support" ? "bg-neutral-200 text-neutral-900" : "text-neutral-700 font-medium"
           }`}
         >
-          Customers Support
+          Customer Support
         </button>
         <button
           onClick={() => setActiveTab("equipment")}
           className={`px-5 py-2 rounded-full font-semibold text-base shadow ${
-            activeTab === "equipment"
-              ? "bg-neutral-200 text-neutral-900"
-              : "text-neutral-700 font-medium"
+            activeTab === "equipment" ? "bg-neutral-200 text-neutral-900" : "text-neutral-700 font-medium"
           }`}
         >
           Medical Equipment
         </button>
       </div>
 
-      {/* 50/50 Layout */}
+      {/* Layout */}
       <div className="flex flex-row gap-8 w-full">
-        {/* Left: content changes with tab */}
+        {/* Left */}
         <div className="w-1/2 flex flex-row justify-center items-start gap-[3px]">
           {activeTab === "team" && (
             <>
@@ -136,7 +141,7 @@ export default function CardPanel() {
           )}
         </div>
 
-        {/* Right: dynamic text */}
+        {/* Right */}
         <div className="w-1/2 flex flex-col justify-start px-6">
           <div className="font-semibold text-neutral-900 mb-2 text-lg">
             {contentMap[activeTab].heading}
@@ -144,13 +149,8 @@ export default function CardPanel() {
           <div className="font-bold text-neutral-900 mb-3 text-2xl leading-tight">
             {contentMap[activeTab].title}
           </div>
-          <p className="text-neutral-700 mb-4 text-sm">
-            {contentMap[activeTab].text}
-          </p>
-          <a
-            href="#"
-            className="text-red-600 underline font-semibold text-sm"
-          >
+          <p className="text-neutral-700 mb-4 text-sm">{contentMap[activeTab].text}</p>
+          <a href="#" className="text-red-600 underline font-semibold text-sm">
             Learn More...
           </a>
         </div>
