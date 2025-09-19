@@ -1,25 +1,11 @@
-import FeatureCard from "./FeatureCard";
-
-// const items = [
-//   {
-//     title: "Employee Management",
-//     description: "Track and manage employee data with ease.",
-//   },
-//   {
-//     title: "Performance Reviews",
-//     description: "Conduct fair and transparent evaluations.",
-//   },
-//   {
-//     title: "Onboarding",
-//     description: "Streamline the onboarding process for new hires.",
-//   },
-// ];
 import { useState } from "react";
 
 function ArrowRight({ className = "", direction = "right" }) {
   return (
     <svg
-      className={`w-4 h-4 ${className} ${direction === "left" ? "rotate-180" : ""}`}
+      className={`w-4 h-4 ${className} ${
+        direction === "left" ? "rotate-180" : ""
+      }`}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -37,13 +23,26 @@ function ArrowRight({ className = "", direction = "right" }) {
 const slides = [
   {
     title: "Transform your healthcare experience.",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    description:
+      "Personalized care plans designed to match your lifestyle and health needs — supported by our trusted caregivers and specialists.",
     pills: [
       [
-        { name: "Floyd Miles", role: "Psychology Specialist", fade: "opacity-60" },
-        { name: "Brooklyn Simmons", role: "Pediatric Nurse", fade: "opacity-80" },
+        {
+          name: "Floyd Miles",
+          role: "Psychology Specialist",
+          fade: "opacity-60",
+        },
+        {
+          name: "Brooklyn Simmons",
+          role: "Pediatric Nurse",
+          fade: "opacity-80",
+        },
         { name: "Eleanor Pena", role: "ICU Nurse.", fade: "opacity-90" },
-        { name: "Savannah Nguyen", role: "Medical Assistant", fade: "opacity-100" },
+        {
+          name: "Savannah Nguyen",
+          role: "Medical Assistant",
+          fade: "opacity-100",
+        },
       ],
       [
         { name: "Kristin Watson", role: "Trauma Nurse", fade: "opacity-60" },
@@ -54,18 +53,22 @@ const slides = [
     ],
     button: {
       text: "Plan your care",
-      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-neutral-700 shadow hover:bg-white/80 border border-neutral-300 backdrop-blur rounded-full",
+      style:
+        "bg-red-600 text-white px-5 py-2 text-sm font-semibold shadow-md hover:bg-black hover:text-white rounded-full transition",
     },
     pillsSide: true,
-    bgImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    bgImage:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
   },
   {
-    title: "Start your journey",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Start your caregiving journey",
+    description:
+      "We welcome caregivers to join our professional community. Work with us to provide compassionate care and grow your career.",
     pills: null,
     button: {
       text: "Become a caregiver",
-      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-red-600 border border-red-700 backdrop-blur rounded-full",
+      style:
+        "bg-red-600 text-white px-5 py-2 text-sm font-semibold shadow-md hover:bg-black hover:text-white rounded-full transition",
     },
     pillsSide: false,
     photo: {
@@ -79,11 +82,13 @@ const slides = [
   },
   {
     title: "Looking for equipment?",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    description:
+      "Find medical equipment that supports your health and independence — delivered and set up right in your home.",
     pills: null,
     button: {
       text: "Browse Equipment",
-      style: "bg-red-500 px-4 py-1 text-xs font-semibold text-white shadow hover:bg-red-600 border border-red-700 backdrop-blur rounded-full",
+      style:
+        "bg-red-600 text-white px-5 py-2 text-sm font-semibold shadow-md hover:bg-black hover:text-white rounded-full transition",
     },
     pillsSide: false,
     photo: {
@@ -99,138 +104,103 @@ const slides = [
 
 export default function Features() {
   const [current, setCurrent] = useState(0);
-
   const slide = slides[current];
 
   return (
     <div className="w-full flex flex-col items-center">
       <section
         id="features"
-        className="relative mx-auto max-w-6xl rounded-[32px] bg-neutral-200 p-0 shadow-lg shadow-gray-400/30 ring-1 ring-black/5 flex flex-col justify-center"
+        className="relative mx-auto max-w-6xl rounded-[32px] bg-white/70 backdrop-blur shadow-lg shadow-gray-400/30 ring-1 ring-black/5 flex flex-col justify-center overflow-hidden"
         style={{ marginTop: "1px", marginBottom: "8px" }}
       >
-        {/* Background */}
-        <div className="absolute inset-0 -z-10 rounded-[32px] overflow-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-neutral-100 via-neutral-200 to-neutral-300 opacity-80" />
-          <svg
-            className="absolute top-0 left-0 w-full h-full opacity-20"
-            viewBox="0 0 400 200"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <ellipse cx="200" cy="100" rx="180" ry="80" fill="#e5e7eb" />
-          </svg>
-        </div>
         {/* Top button */}
         <div className="w-full flex justify-between px-8 pt-8">
-          <button className={slide.button.style}>
+          <a href="/services#customer-support" className={slide.button.style}>
             {slide.button.text}
-          </button>
+          </a>
         </div>
+
         {/* Pills or Photo */}
         <div
-          className="flex flex-row items-end justify-between px-8 pb-1 w-full max-w-6xl mx-auto"
+          className="flex flex-row items-end justify-between px-8 pb-8 w-full max-w-6xl mx-auto"
           style={{
-            position: "relative",
             marginTop: "40px",
-            marginBottom: "2rem",
             minHeight: "260px",
             alignItems: "stretch",
           }}
         >
           {/* Left side: Text */}
           <div className="flex flex-col items-start justify-end min-w-[320px] max-w-lg z-10">
-            <h2 className="text-xl md:text-2xl font-bold text-neutral-900 mb-2 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-3 leading-tight">
               {slide.title}
             </h2>
-            <p className="text-base md:text-lg text-neutral-700 max-w-md">
+            <p className="text-base md:text-lg text-neutral-700 max-w-md leading-relaxed">
               {slide.description}
             </p>
           </div>
+
           {/* Right side: Pills or Photo */}
           {slide.pillsSide ? (
-            <div className="relative flex flex-col gap-y-2 items-end justify-end min-w-[320px] max-w-none" style={{ marginLeft: "-8px" }}>
-              {/* Image between text and pills */}
-              <div
-                className="absolute left-0 top-0 h-full w-full rounded-2xl overflow-hidden -z-10 flex items-center justify-end"
-                style={{
-                  pointerEvents: "none",
-                }}
-              >
+            <div className="relative flex flex-col gap-y-3 items-end justify-end min-w-[320px]">
+              {/* Background image */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden -z-10">
                 <img
                   src={slide.bgImage}
                   alt=""
                   className="object-cover h-full w-full"
                   style={{
-                    objectPosition: "right center",
-                    filter: "brightness(0.95)",
+                    filter: "brightness(0.9)",
                   }}
                 />
-                {/* Fading effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-l from-white/80 via-white/60 to-transparent" />
+              </div>
+
+              {/* Pills */}
+              {slide.pills.map((row, i) => (
                 <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to left, rgba(245,246,250,0.85) 55%, rgba(245,246,250,0.01) 100%)",
-                  }}
-                />
-              </div>
-              <div className="flex flex-row flex-nowrap justify-end gap-x-1 z-10">
-                {slide.pills[0].map((pill) => (
-                  <div
-                    key={pill.name}
-                    className={`flex items-center rounded-full bg-white px-4 py-2 shadow text-neutral-900 font-semibold text-xs min-w-[110px] max-w-[140px] transition-opacity duration-700 ${pill.fade}`}
-                  >
-                    {pill.name}
-                    <span className="ml-1 text-neutral-500 text-[10px]">{pill.role}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-row flex-nowrap justify-end gap-x-1 z-10">
-                {slide.pills[1].map((pill) => (
-                  <div
-                    key={pill.name}
-                    className={`flex items-center rounded-full bg-white px-4 py-2 shadow text-neutral-900 font-semibold text-xs min-w-[110px] max-w-[140px] transition-opacity duration-700 ${pill.fade}`}
-                  >
-                    {pill.name}
-                    <span className="ml-1 text-neutral-500 text-[10px]">{pill.role}</span>
-                  </div>
-                ))}
-              </div>
+                  key={i}
+                  className="flex flex-row flex-nowrap justify-end gap-x-2 z-10"
+                >
+                  {row.map((pill) => (
+                    <div
+                      key={pill.name}
+                      className={`flex flex-col items-start rounded-xl bg-white/90 px-4 py-2 shadow text-neutral-900 font-semibold text-xs min-w-[120px] transition-opacity duration-700 ${pill.fade}`}
+                    >
+                      {pill.name}
+                      <span className="text-neutral-500 text-[10px] font-normal">
+                        {pill.role}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           ) : (
             <div
               className="relative flex-1 flex items-stretch justify-end h-[260px]"
-              style={slide.photoStyle ? slide.photoStyle : { maxWidth: "370px", minWidth: "320px" }}
+              style={
+                slide.photoStyle
+                  ? slide.photoStyle
+                  : { maxWidth: "370px", minWidth: "320px" }
+              }
             >
               <img
                 src={slide.photo.src}
                 alt={slide.photo.alt}
-                className="object-cover rounded-2xl w-full h-full"
+                className="object-cover rounded-2xl w-full h-full shadow-md"
                 style={{
-                  ...slide.photoStyle,
                   objectFit: "cover",
                   objectPosition: "center right",
-                  boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
-                  width: "100%",
-                  height: "100%",
                 }}
               />
-              {/* Fading effect */}
-              <div
-                className="absolute top-0 right-0 h-full pointer-events-none"
-                style={{
-                  width: "60%",
-                  background: "linear-gradient(to left, rgba(245,246,250,0.85) 60%, rgba(245,246,250,0.01) 100%)",
-                  borderTopRightRadius: "1rem",
-                  borderBottomRightRadius: "1rem",
-                }}
-              />
+              <div className="absolute inset-0 bg-gradient-to-l from-white/70 via-white/30 to-transparent rounded-2xl" />
             </div>
           )}
         </div>
       </section>
-      {/* Carousel Navigation & Segmented Slider */}
-      <div className="w-full max-w-6xl flex items-center justify-between px-8 mt-2" style={{ minHeight: "40px" }}>
+
+      {/* Carousel Navigation */}
+      <div className="w-full max-w-6xl flex items-center justify-between px-8 mt-2">
         {/* Arrow Button (left) */}
         <div>
           {current > 0 ? (
@@ -245,6 +215,7 @@ export default function Features() {
             <span className="inline-block w-[44px]"></span>
           )}
         </div>
+
         {/* Segmented Slider */}
         <div className="flex-1 flex justify-center items-center">
           <div className="flex gap-2">
@@ -253,17 +224,19 @@ export default function Features() {
                 key={idx}
                 className={`transition-all duration-300 rounded-full ${
                   idx === current
-                    ? "bg-red-500 w-3 h-0.5"
-                    : "bg-neutral-300 w-1.5 h-0.5"
+                    ? "bg-red-600 w-4 h-1.5"
+                    : "bg-neutral-300 w-2 h-1"
                 }`}
                 style={{
-                  boxShadow: idx === current ? "0 2px 8px rgba(0,0,0,0.10)" : undefined,
+                  boxShadow:
+                    idx === current ? "0 2px 8px rgba(0,0,0,0.10)" : undefined,
                   opacity: idx === current ? 1 : 0.7,
                 }}
               />
             ))}
           </div>
         </div>
+
         {/* Arrow Button (right) */}
         <div>
           {current < slides.length - 1 ? (

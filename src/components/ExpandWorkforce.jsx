@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function ArrowRight({ className = "", direction = "right" }) {
-  // Arrow pointing right (3 o'clock) or left (9 o'clock)
   return (
     <svg
       className={`w-4 h-4 ${className} ${direction === "left" ? "rotate-180" : ""}`}
@@ -19,7 +18,6 @@ function ArrowRight({ className = "", direction = "right" }) {
   );
 }
 
-// Diverse card data
 const cards = [
   {
     name: "Ava Patel",
@@ -71,13 +69,11 @@ const cards = [
 export default function ExpandWorkforce() {
   const [startIdx, setStartIdx] = useState(0);
 
-  // Show 2.5 cards at a time
   const visibleCount = 2.5;
   const cardWidth = 270;
   const gap = 32;
   const containerWidth = cardWidth * visibleCount + gap * (visibleCount - 1);
 
-  // Calculate max index so last card is fully visible
   const maxIdx = cards.length - Math.ceil(visibleCount);
 
   const handlePrev = () => {
@@ -88,158 +84,144 @@ export default function ExpandWorkforce() {
     setStartIdx((prev) => Math.min(prev + 1, maxIdx));
   };
 
-  // Only show the cards that should be visible (including the half card)
   const visibleCards = cards.slice(startIdx, startIdx + Math.ceil(visibleCount) + 1);
 
-  // For the last slide, show the last card fully and half of the previous one
-  const isLastSlide = startIdx === maxIdx;
-
-  // Segmented toggler logic
   const segments = cards.length - Math.floor(visibleCount) + 1;
 
   return (
     <section className="w-screen h-screen flex flex-row bg-white font-sans overflow-hidden">
-      {/* Main content */}
+      {/* Left panel */}
       <div className="flex-1 flex flex-col px-12 py-10 bg-white min-h-0 min-w-0">
-        <h1 className="text-5xl font-bold mb-2 leading-tight tracking-tight" style={{ fontFamily: "inherit" }}>
-          Quickly find your <br /> Medical partner.
+        <h1 className="text-5xl font-bold mb-4 leading-tight tracking-tight">
+          Quickly find your <br /> medical partner.
         </h1>
-        <p className="text-neutral-700 mb-8 text-base max-w-xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <p className="text-neutral-700 mb-10 text-base max-w-xl">
+          Whether you are a patient looking for trusted care, or a nurse seeking
+          meaningful opportunities, our platform helps you connect with the
+          right people, faster and easier.
         </p>
+
         <div className="flex flex-row gap-8">
-          {/* Employees Card */}
-          <div className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end bg-neutral-100" style={{ height: "220px" }}>
-            <div className="absolute inset-0 bg-neutral-300 rounded-[24px]"></div>
-            <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">Patients</span>
+          {/* Patients card */}
+          <div
+            className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end bg-gradient-to-tr from-neutral-200 to-neutral-100"
+            style={{ height: "220px" }}
+          >
+            <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">
+              Patients
+            </span>
             <div className="relative z-10 px-6 pb-6">
               <div className="flex flex-row gap-2 mb-4">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="avatar"
+                  className="w-9 h-9 rounded-full"
+                />
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="avatar"
+                  className="w-9 h-9 rounded-full"
+                />
+                <img
+                  src="https://randomuser.me/api/portraits/women/65.jpg"
+                  alt="avatar"
+                  className="w-9 h-9 rounded-full"
+                />
               </div>
-              <div className="text-lg font-semibold mb-2 text-neutral-900">Find a Nurse</div>
-              <button className="rounded-full bg-white/80 px-3 py-2 text-base font-semibold text-neutral-700 shadow flex items-center">
-                <ArrowRight />
-              </button>
+              <div className="text-lg font-semibold mb-3 text-neutral-900">
+                Find a Nurse
+              </div>
+              <a
+                href="/services#customer-support"
+                className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white shadow hover:bg-neutral-700 transition"
+              >
+                Find a Nurse Today <ArrowRight />
+              </a>
             </div>
           </div>
-          {/* Contractor Card */}
-          <div className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end" style={{ height: "220px" }}>
-            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&h=220&facepad=2" alt="contractor" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/30 rounded-[24px]"></div>
-            <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">Nurses</span>
-            <div className="relative z-10 px-6 pb-6">
-              <div className="flex flex-row gap-2 mb-4">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="avatar" className="w-9 h-9 rounded-full" />
-              </div>
-              <div className="text-lg font-semibold text-white mb-2">Find a Patient</div>
-              <button className="rounded-full bg-white/30 px-3 py-2 text-base font-semibold text-white shadow flex items-center">
-                <ArrowRight className="text-white" />
-              </button>
+
+{/* Nurses card */}
+        <div
+          className="relative rounded-[24px] overflow-hidden min-w-[220px] shadow flex flex-col justify-end"
+          style={{ height: "220px" }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&h=220&facepad=2"
+            alt="nurse"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30 rounded-[24px]"></div>
+          <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">
+            Nurses
+          </span>
+          <div className="relative z-10 px-6 pb-6">
+            <div className="flex flex-row gap-2 mb-4">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="avatar"
+                className="w-9 h-9 rounded-full"
+              />
+              <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="avatar"
+                className="w-9 h-9 rounded-full"
+              />
+              <img
+                src="https://randomuser.me/api/portraits/women/65.jpg"
+                alt="avatar"
+                className="w-9 h-9 rounded-full"
+              />
             </div>
+            <div className="text-lg font-semibold text-white mb-3">
+              Join Our Network
+            </div>
+            <a
+              href="/services#customer-support"
+              className="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-black hover:text-white transition"
+            >
+              Work With Us <ArrowRight />
+            </a>
           </div>
         </div>
+
+        </div>
       </div>
-      {/* Right cards carousel */}
+
+      {/* Right-side carousel */}
       <div
         className="flex flex-col items-center justify-center bg-white px-0 py-10 min-h-0"
         style={{ width: containerWidth, overflow: "hidden" }}
       >
-        {/* Cards */}
         <div
           className="flex flex-row gap-8 items-center transition-transform duration-300"
-          style={{
-            width: containerWidth,
-            overflow: "hidden",
-          }}
+          style={{ width: containerWidth, overflow: "hidden" }}
         >
-          {visibleCards.map((card, idx) => {
-            // For the last slide, show the last card fully and half of the previous one
-            if (isLastSlide && idx === 0) {
-              return (
-                <div
-                  key={startIdx + idx}
-                  className="bg-neutral-300 rounded-2xl p-6 flex flex-col shadow relative"
-                  style={{
-                    height: "290px",
-                    minWidth: `${cardWidth / 2}px`,
-                    maxWidth: `${cardWidth / 2}px`,
-                    opacity: 0.7,
-                  }}
-                >
-                  <span className="absolute top-4 left-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                    Get in touch <ArrowRight />
-                  </span>
-                  <img
-                    src={card.img}
-                    alt="avatar"
-                    className="w-16 h-16 rounded-xl object-cover mt-8 mb-4"
-                    style={{ marginLeft: 0 }}
-                  />
-                  <div className="flex flex-col items-start w-full">
-                    <div className="text-base font-semibold mb-1 text-white">{card.name}</div>
-                    <div className="text-xs text-white mb-2">{card.role}</div>
-                  </div>
-                  <a href="#" className="text-xs text-white underline mt-auto self-end">Read More.</a>
-                </div>
-              );
-            }
-            // For the last card, show it fully
-            if (isLastSlide && idx === 1) {
-              return (
-                <div
-                  key={startIdx + idx}
-                  className="bg-neutral-300 rounded-2xl p-6 flex flex-col min-w-[270px] max-w-[270px] shadow relative"
-                  style={{ height: "290px" }}
-                >
-                  <span className="absolute top-4 left-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                    Get in touch <ArrowRight />
-                  </span>
-                  <img
-                    src={card.img}
-                    alt="avatar"
-                    className="w-32 h-32 rounded-xl object-cover mt-8 mb-4"
-                    style={{ marginLeft: 0 }}
-                  />
-                  <div className="flex flex-col items-start w-full">
-                    <div className="text-base font-semibold mb-1 text-white">{card.name}</div>
-                    <div className="text-xs text-white mb-2">{card.role}</div>
-                  </div>
-                  <a href="#" className="text-xs text-white underline mt-auto self-end">Read More.</a>
-                </div>
-              );
-            }
-            // For all other cards
-            return (
-              <div
-                key={startIdx + idx}
-                className="bg-neutral-300 rounded-2xl p-6 flex flex-col min-w-[270px] max-w-[270px] shadow relative"
-                style={{ height: "290px" }}
-              >
-                <span className="absolute top-4 left-4 bg-white/80 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                  Get in touch <ArrowRight />
-                </span>
+          {visibleCards.map((card, idx) => (
+            <div
+              key={startIdx + idx}
+              className="relative rounded-[24px] overflow-hidden min-w-[270px] max-w-[270px] shadow flex flex-col justify-end bg-gradient-to-tr from-neutral-200 to-neutral-100"
+              style={{ height: "260px" }}
+            >
+              <span className="absolute top-5 left-5 bg-white/80 px-3 py-1 rounded-full text-xs font-medium">
+                Professional
+              </span>
+              <div className="relative z-10 px-6 pb-6">
                 <img
                   src={card.img}
-                  alt="avatar"
-                  className="w-32 h-32 rounded-xl object-cover mt-8 mb-4"
-                  style={{ marginLeft: 0 }}
+                  alt={card.name}
+                  className="w-16 h-16 rounded-full object-cover mb-4"
                 />
-                <div className="flex flex-col items-start w-full">
-                  <div className="text-base font-semibold mb-1 text-white">{card.name}</div>
-                  <div className="text-xs text-white mb-2">{card.role}</div>
+                <div className="text-lg font-semibold mb-1 text-neutral-900">
+                  {card.name}
                 </div>
-                <a href="#" className="text-xs text-white underline mt-auto self-end">Read More.</a>
+                <div className="text-sm text-neutral-600">{card.role}</div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
-        {/* Segmented toggler and arrows below carousel */}
+
+        {/* Arrows + segmented toggler */}
         <div className="flex flex-row items-center justify-center w-full mt-6 gap-4">
-          {/* Left arrow */}
           <button
             onClick={handlePrev}
             disabled={startIdx === 0}
@@ -250,7 +232,7 @@ export default function ExpandWorkforce() {
           >
             <ArrowRight direction="left" className="text-white" />
           </button>
-          {/* Segmented toggler */}
+
           <div className="flex gap-2">
             {Array.from({ length: segments }).map((_, idx) => (
               <button
@@ -262,16 +244,15 @@ export default function ExpandWorkforce() {
                     : "bg-neutral-300 w-3 h-1.5"
                 }`}
                 style={{
-                  boxShadow: idx === startIdx ? "0 2px 8px rgba(0,0,0,0.10)" : undefined,
+                  boxShadow:
+                    idx === startIdx ? "0 2px 8px rgba(0,0,0,0.10)" : undefined,
                   opacity: idx === startIdx ? 1 : 0.7,
-                  border: "none",
-                  cursor: "pointer",
                 }}
                 aria-label={`Go to cards ${idx + 1}`}
               />
             ))}
           </div>
-          {/* Right arrow */}
+
           <button
             onClick={handleNext}
             disabled={startIdx === maxIdx}

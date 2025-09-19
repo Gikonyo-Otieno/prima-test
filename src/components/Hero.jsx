@@ -15,8 +15,37 @@ function ArrowUpRight({ className = "" }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M6 18L18 6"></path>
-      <path d="M8 6h10v10"></path>
+      <path d="M6 18L18 6" />
+      <path d="M8 6h10v10" />
+    </svg>
+  );
+}
+
+/* Small, simple medical icons (kept minimal so they render reliably) */
+function IconStethoscope({ className = "" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 2v6a3 3 0 0 0 3 3h0" />
+      <path d="M9 11v4a6 6 0 1 0 6 6v-5" />
+      <circle cx="19" cy="7" r="2" />
+    </svg>
+  );
+}
+function IconBed({ className = "" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 7h18" />
+      <path d="M5 7v9" />
+      <rect x="8" y="9" width="11" height="6" rx="1" />
+      <path d="M21 14v4" />
+    </svg>
+  );
+}
+function IconHeartbeat({ className = "" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 12h3l2-4 2 8 3-6 2 4h4" />
+      <path d="M20 6v2" />
     </svg>
   );
 }
@@ -38,7 +67,7 @@ export default function Hero() {
     setTimeout(() => lastTriggerRef.current?.focus?.(), 0);
   };
 
-  // focus + body scroll lock
+  // focus + scroll lock when modal open
   useEffect(() => {
     if (open) {
       const t = setTimeout(() => firstButtonRef.current?.focus(), 10);
@@ -51,7 +80,7 @@ export default function Hero() {
     }
   }, [open]);
 
-  // esc + tab trap
+  // Escape + tab trap
   useEffect(() => {
     const onKey = (e) => {
       if (!open) return;
@@ -89,52 +118,138 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="relative h-[520px] w-full bg-neutral-950">
-          <div className="pointer-events-none absolute inset-0 opacity-70">
-            <div className="absolute inset-0 bg-[radial-gradient(900px_360px_at_50%_-10%,rgba(255,136,51,0.35),transparent_65%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(700px_260px_at_20%_0%,rgba(255,94,0,0.28),transparent_65%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(700px_260px_at_80%_0%,rgba(255,140,0,0.20),transparent_65%)]"></div>
+    <section className="relative overflow-hidden bg-gradient-to-b from-neutral-900/90 to-neutral-800/80">
+      {/* subtle decorative crosses in background (tonal, not distracting) */}
+      <svg className="absolute inset-0 -z-10 w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <defs>
+          <pattern id="p" width="120" height="120" patternUnits="userSpaceOnUse">
+            <g transform="translate(60,60)" stroke="rgba(255,255,255,0.03)" strokeWidth="2">
+              <path d="M-10 0 h20" />
+              <path d="M0 -10 v20" />
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#p)" />
+      </svg>
+
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* LEFT: headline + copy + CTAs */}
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white drop-shadow-md">
+              <span className="block">Karibu</span>
+              <span className="block">
+                <span className="text-red-600">Prima</span>{" "}
+                <span className="text-white">Healthcare</span>
+              </span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-200">
+              Professional, compassionate home-health services backed by robust coordination tools.
+              We match qualified nurses to families, manage care plans and equipment,
+              and provide reliable support so patients receive consistent, safe care at home.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-4">
+              {/* Primary CTA: Get Started (opens modal) */}
+              <button
+                onClick={openModal}
+                ref={firstButtonRef}
+                className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold shadow-md transition"
+                style={{ backgroundColor: "#cb1f1f", color: "#fff" }} // red
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#111827"; // black on hover
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#cb1f1f";
+                  e.currentTarget.style.color = "#fff";
+                }}
+              >
+                Get Started
+                <ArrowUpRight />
+              </button>
+
+              {/* Secondary CTA: Learn More */}
+              <Link
+                to="/services#customer-support"
+                className="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-900 shadow-md border border-neutral-200 transition"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#111827";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#ffffff";
+                  e.currentTarget.style.color = "#111827";
+                }}
+              >
+                Learn More
+                <ArrowUpRight className="text-current" />
+              </Link>
+            </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-neutral-950 to-neutral-950"></div>
+
+          {/* RIGHT: medical-focused visual cluster (no phone) */}
+          <div className="flex flex-col gap-6 items-center md:items-end">
+            <div className="w-full max-w-sm md:max-w-md grid grid-cols-1 gap-4">
+              {/* Card 1 */}
+              <div className="flex items-center gap-4 bg-white/6 border border-white/6 rounded-2xl p-4 shadow-md">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-red-600 text-white">
+                  <IconStethoscope className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-white font-semibold">Home Nursing</div>
+                  <div className="text-neutral-200 text-sm">Skilled nurses for top drawer care close to you.</div>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="flex items-center gap-4 bg-white/6 border border-white/6 rounded-2xl p-4 shadow-md">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-red-600 text-white">
+                  <IconBed className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-white font-semibold">Equipment Hire & Sales</div>
+                  <div className="text-neutral-200 text-sm">Beds, mobility aids and home support equipment.</div>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="flex items-center gap-4 bg-white/6 border border-white/6 rounded-2xl p-4 shadow-md">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-red-600 text-white">
+                  <IconHeartbeat className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-white font-semibold">Care Coordination</div>
+                  <div className="text-neutral-200 text-sm">Care plans, scheduling and check-ups.</div>
+                </div>
+              </div>
+            </div>
+
+            {/* small band showing trust / contact */}
+            <div className="mt-4 flex items-center gap-3 bg-white/5 border border-white/6 px-4 py-2 rounded-full shadow-sm">
+              <div className="text-sm text-white/90 font-medium">Your trusted healthcare partner</div>
+              <div className="h-8 w-px bg-white/10" />
+              <Link
+                to="/services#customer-support"
+                className="text-sm px-3 py-1 rounded-full bg-white text-neutral-900 font-semibold hover:bg-black hover:text-white transition"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#111827";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#ffffff";
+                  e.currentTarget.style.color = "#111827";
+                }}
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="mx-auto flex max-w-4xl flex-col items-center px-6 pt-28 pb-28 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight text-neutral-950 sm:text-5xl md:text-6xl">
-          <span className="block">Karibu </span>
-          <span className="text-red-700">Prima</span> healthcare
-        </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-950">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-          <button
-            type="button"
-            onClick={openModal}
-            className="inline-flex items-center justify-center rounded-full bg-red-700 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-          >
-            Get Started
-            <ArrowUpRight className="text-neutral-950" />
-          </button>
-
-          {/* <-- Updated Learn More: now navigates to the same place as Carousel's Learn More */}
-          <Link
-            to="/services#customer-support"
-            className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-neutral-900 shadow-md ring-1 ring-black/5 hover:bg-white"
-          >
-            Learn More
-            <ArrowUpRight className="text-neutral-950" />
-          </Link>
-        </div>
-      </div>
-
-      {/* Modal */}
+      {/* Modal (unchanged behavior) */}
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
@@ -157,25 +272,40 @@ export default function Hero() {
 
             <h3 className="text-xl font-bold text-neutral-900 mb-3">Get Started</h3>
             <p className="text-sm text-neutral-700 mb-6">
-              Choose where you'd like to go next — learn more about our services or explore career opportunities with us.
+              Speak to our team and learn how Prima can support you on your healthcare journey.
             </p>
 
             <div className="flex gap-3">
               <button
-                ref={firstButtonRef}
                 onClick={goToServices}
-                className="flex-1 inline-flex items-center justify-center rounded-full bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+                className="flex-1 inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow transition"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#111827";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#cb1f1f";
+                  e.currentTarget.style.color = "#fff";
+                }}
               >
                 Services
-                <ArrowUpRight className="ml-2 text-neutral-950" />
+                <ArrowUpRight className="ml-2 text-white" />
               </button>
 
               <button
                 onClick={goToCareers}
-                className="flex-1 inline-flex items-center justify-center rounded-full border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-800 bg-white shadow hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-300"
+                className="flex-1 inline-flex items-center justify-center rounded-full border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-800 bg-white shadow transition"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#111827";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#ffffff";
+                  e.currentTarget.style.color = "#111827";
+                }}
               >
                 Careers
-                <ArrowUpRight className="ml-2 text-neutral-950" />
+                <ArrowUpRight className="ml-2 text-current" />
               </button>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white relative pt-12" >
 
 
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+      <div className="mt-[1px]">  {/* adjust this number */}
         <Carousel />
       </div>
       {/* Hero with dark smoky background */}

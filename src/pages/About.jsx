@@ -1,6 +1,5 @@
-import WhoWeAre from "../components/WhoWeAre";
-import WhatWeDo from "../components/WhatWeDo";
-import Partners from "../components/Partners";
+
+import CompanySections from "../components/CompanySections";
 
 export default function About() {
   return (
@@ -19,9 +18,7 @@ export default function About() {
 
         {/* Content inside */}
         <div className="relative w-full flex flex-col items-center justify-center py-16 px-6 space-y-12">
-          <WhoWeAre />
-          <WhatWeDo />
-          <Partners />
+          <CompanySections />
         </div>
       </div>
 
