@@ -60,7 +60,7 @@ const slides = [
     },
     pillsSide: false,
     photo: {
-      src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd2e?auto=format&fit=crop&w=600&q=80",
+      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
       alt: "Home medical care",
     },
     photoStyle: {
