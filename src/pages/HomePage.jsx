@@ -10,7 +10,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white relative pt-12" >
 
 
-      <div className="mt-[1px]">  {/* adjust this number */}
+      <div className="mt-[10px]">  {/* adjust this number */}
         <Carousel />
       </div>
       {/* Hero with dark smoky background */}

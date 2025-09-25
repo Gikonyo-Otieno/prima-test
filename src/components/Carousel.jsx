@@ -194,10 +194,11 @@ export default function Carousel() {
     navigate("/services#customer-support");
   };
 
-  const leftDisabled = getIndexFromOffset(offset) <= 0;
-  const rightDisabled = positions.length
-    ? positions[getIndexFromOffset(offset)] >= maxOffset
-    : false;
+const tolerance = 4; // pixels
+
+const leftDisabled = offset <= 0 + tolerance;
+const rightDisabled = offset >= maxOffset - tolerance;
+
 
   return (
     <div
@@ -210,12 +211,12 @@ export default function Carousel() {
         disabled={leftDisabled}
         className={`relative rounded-full w-6 h-6 shadow transition flex items-center justify-center ${
           leftDisabled
-            ? "bg-neutral-100 text-neutral-400 cursor-not-allowed"
-            : "bg-neutral-200 hover:bg-neutral-300"
+            ? "bg-neutral-800/30 text-neutral-400 cursor-not-allowed"
+            : "bg-neutral-900 hover:bg-neutral-800"
         }`}
         aria-label="Previous"
       >
-        <ChevronLeft className="w-3 h-3" />
+        <ChevronLeft className={`w-3 h-3 ${leftDisabled ? "text-neutral-400" : "text-white"}`} />
       </button>
 
       <div
