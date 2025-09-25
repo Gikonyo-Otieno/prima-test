@@ -146,7 +146,7 @@ export default function Hero() {
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-200">
               Professional, compassionate home-health services backed by robust coordination tools.
-              We match qualified nurses to families, manage care plans and equipment,
+              We match qualified nurses and caregivers to families, manage care plans and equipment,
               and provide reliable support so patients receive consistent, safe care at home.
             </p>
 
