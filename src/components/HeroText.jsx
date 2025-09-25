@@ -91,7 +91,7 @@ export default function HeroText() {
           className="max-w-2xl text-white/90 text-sm md:text-base mb-8 animate-hero-fade-up"
           style={{ animationDelay: "130ms" }}
         >
-          Fast, compassionate care — at home or in trusted facilities. Book
+          Fast, compassionate care at home or in trusted facilities. Book
           services, equipment or speak to our support team and we'll coordinate
           the rest.
         </p>

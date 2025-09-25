@@ -24,7 +24,7 @@ const slides = [
   {
     title: "Transform your healthcare experience.",
     description:
-      "Personalized care plans designed to match your lifestyle and health needs — supported by our trusted caregivers and specialists.",
+      "Personalized care plans designed to match your lifestyle and health needs supported by our trusted caregivers and specialists.",
     pills: [
       [
         { name: "Floyd Miles", role: "Psychology Specialist", fade: "opacity-60" },
@@ -71,7 +71,7 @@ const slides = [
   {
     title: "Looking for equipment?",
     description:
-      "Find medical equipment that supports your health and independence — delivered and set up right in your home.",
+      "Find medical equipment that supports your health and independence delivered and set up right in your home.",
     pills: null,
     button: {
       text: "Browse Equipment",

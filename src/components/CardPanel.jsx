@@ -165,7 +165,7 @@ export default function CardPanel() {
     equipment: {
       heading: "Equip Your Care",
       title: "Medical Equipment for Sale & Hire",
-      text: "Access a wide range of medical equipment — available for purchase or rental — to support your health needs at home or in care facilities.",
+      text: "Access a wide range of medical equipment available for purchase or rental to support your health needs at home or in care facilities.",
     },
   };
 
@@ -173,12 +173,12 @@ export default function CardPanel() {
     {
       title: "Long Term Care",
       description:
-        "Long-term care delivered in the comfort of your home or at a trusted facility. Ongoing nursing, personal care and support tailored to long-term needs.",
+        "Long term care delivered in the comfort of your home or at a trusted facility. Ongoing nursing, personal care and support tailored to long term needs.",
     },
     {
       title: "Short Term Care",
       description:
-        "Short-term, goal-oriented care to support recovery after surgery, illness, or a hospital stay — delivered at home or in partner facilities.",
+        "Short term, goal oriented care to support recovery after surgery, illness, or a hospital stay delivered at home or in partner facilities.",
     },
     {
       title: "Healthcare Services",
@@ -253,8 +253,8 @@ export default function CardPanel() {
               title={activeTab === "support" ? "Customer Support" : "Medical Equipment"}
               description={
                 activeTab === "support"
-                  ? "Get in touch with our support team anytime — we’re here to answer your questions and guide you."
-                  : "Contact us to buy or hire high-quality medical equipment tailored to your care needs."
+                  ? "Get in touch with our support team anytime we’re here to answer your questions and guide you."
+                  : "Contact us to buy or hire high quality medical equipment tailored to your care needs."
               }
               contact={contactObj}
               showLearnMore={activeTab !== "support"}
