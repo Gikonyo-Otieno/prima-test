@@ -1,346 +1,262 @@
-import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, ChevronDown, X, ArrowUpRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function Carousel() {
-  const navigate = useNavigate();
+/* === Arrow Component === */
+function ArrowRight({ className = "", direction = "right" }) {
+  return (
+    <svg
+      className={`w-4 h-4 ${className} ${direction === "left" ? "rotate-180" : ""}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14"></path>
+      <path d="M13 6l6 6-6 6"></path>
+    </svg>
+  );
+}
 
-  const items = [
-    "Skilled Nursing Care",
-    "Medical Support Services",
-    "Assisted Living",
-    "Respite Care",
-    "Holiday and Travel",
-    "Recuperative Care",
-    "Kwaheri Services",
-    "Equipment Sales & Hire",
-  ];
+/* === Data === */
+const details = {
+  "Skilled Nursing Care": {
+    image:
+      "https://images.unsplash.com/photo-1600959907703-125ba1374a12?w=1200&q=80",
+    paragraphs: [
+      "This is either residential live-in nursing care or general nursing support services.",
+      "Our database of nurses provide palliative/hospice care, general nursing services and procedures (wound management, drug administration, injections and supervision of caregivers).",
+      "We have qualified nurses in the fields of geriatric care, palliative nursing and oncology nursing.",
+      "All our nurses are registered with the Kenyan Nursing Council and hold valid licences.",
+    ],
+  },
+  "Medical Support Services": {
+    image:
+      "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=80",
+    paragraphs: [
+      "Through our strategic partnerships with medical providers in allied services e.g. physical therapists, diagnostic services, medical supply companies. Our services extend to provide our clients with all services and supplies that are required in their homes.",
+      "This convenient service facilitates our clients who no longer need to navigate the complicated healthcare system on their own.",
+      "Our clients also enjoy the added advantage of our setting up doctors appointments for them, we also set up specialised teams required for their care e.g. palliative care",
+    ],
+  },
+  "Assisted Living": {
+    image:
+      "https://images.unsplash.com/photo-1504439468489-c8920d796a29?w=1200&q=80",
+    paragraphs: [
+      "<strong>Care Giver Services</strong> all our assisted living caregivers are supervised by our staff nurse who issues careplans that guide daily care. Our caregivers are either trained or have had experience in caring for clients who suffer from dementia, alzheimers and other related issues e.g. loneliness and nutritional deficiencies.",
+      "<strong>Medical Services Coordination</strong> most geriatrics will need medical oversight. We work very closely with each client’s primary medical doctor who guides the medical care of the clients. Daily reports are sent to the staff nurse to monitor and where necessary raise alerts to the primary doctor.",
+    ],
+  },
+  "Respite Care": {
+    image:
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80",
+    paragraphs: [
+      "A solution for families who need temporary support in the care of their loved one.",
+      "Our Carers come in to give a helping hand when you are temporarily indisposed or need a break from your caregiving duties.",
+      "We offer daily, weekly or monthly options.",
+    ],
+  },
+  "Holiday and Travel": {
+    image:
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&q=80",
+    paragraphs: [
+      "With the new trend of multi-generational family travel, Prima offers support to tourists wishing to visit the coast or other parts of the country and have special needs.",
+      "Services would involve equipment hire like wheelchairs, companion care, doctor visits and appointments. Services extend to both adults and children.",
+    ],
+  },
+  "Recuperative Care": {
+    image:
+      "https://images.unsplash.com/photo-1588776814546-ec7d7e8c74de?w=1200&q=80",
+    paragraphs: [
+      "In conjunction with our accomodation partners, we offer care to those would like to be cared for in a homely environment while they recuperate from surgery or illness.",
+      "With our partners who extend throughout the country, our team caters to all the medical support you would require.",
+      "Our hospital referral partners provide the necessary support in case of any emergencies or if incidents occur.",
+    ],
+  },
+  "Kwaheri Services": {
+    image:
+      "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?w=1200&q=80",
+    paragraphs: [
+      "For many of our clients, the end of life is a reality that they have to face. We offer compassionate end of life care in the comfort of your home. As well as support and care for loved ones through this difficult time.",
+      "This becomes especially important for clients whose family may live away or who'd appreciate having all logistics handled for them.",
+      "Our support extends to evacuation of the deceased, coordination with necessary authorities, autopsy and morgue services as well as final send off per the client's and family's wishes.",
+    ],
+  },
+  "Equipment Sales & Hire": {
+    image:
+      "https://images.unsplash.com/photo-1583911860630-bc25d7d00f4b?w=1200&q=80",
+    paragraphs: [
+      "We offer a wide range of medical equipment for sale and hire to support your care needs at home or in care facilities.",
+      "This includes mobility aids, hospital beds, and other essential equipment.",
+      "Our team can help you select the right equipment and provide delivery and setup services.",
+    ],
+  },
+};
 
-  const details = {
-    "Skilled Nursing Care": {
-      title: "Skilled Nursing Care",
-      imageA:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&q=60",
-      paragraphs: [
-        "This is either residential live-in nursing care or general nursing support services.",
-        "Our database of nurses provide palliative/hospice care, general nursing services and procedures (wound management, drug administration, injections and supervision of caregivers).",
-        "We have qualified nurses in the fields of geriatric care, palliative nursing and oncology nursing.",
-        "All our nurses are registered with the Kenyan Nursing Council and hold valid licences.",
-      ],
-    },
-    "Medical Support Services": {
-      title: "Medical Support Services",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "Through our strategic partnerships with medical providers in allied services e.g. physical therapists, diagnostic services, medical supply companies. Our services extend to provide our clients with all services and supplies that are required in their homes.",
-        "This convenient service facilitates our clients who no longer need to navigate the complicated healthcare system on their own.",
-        "Our clients also enjoy the added advantage of our setting up doctors appointments for them, we also set up specialised teams required for their care e.g. palliative care",
-      ],
-    },
-    "Assisted Living": {
-      title: "Assisted Living",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "<strong>Care Giver Services</strong> - all our assisted living caregivers are supervised by our staff nurse who issues careplans that guide daily care. Our caregivers are either trained or have had experience in caring for clients who suffer from dementia, alzheimers and other related issues e.g. loneliness and nutritional deficiencies",
-        "<strong>Medical Services Coordination</strong> - most geriatrics will need medical oversight. We work very closely with each client’s primary medical doctor who guides the medical care of the clients. Daily reports are sent to the staff nurse to monitor and where necessary raise alerts to the primary doctor",
-      ],
-    },
-    "Respite Care": {
-      title: "Respite Care",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "A solution for families who need temporary support in the care of their loved one.",
-        "Our Carers come in to give a helping hand when you are temporarily indisposed or need a break from your caregiving duties.",
-        "We offer daily, weekly or monthly options.",
-      ],
-    },
-    "Holiday and Travel": {
-      title: "Holiday and Travel",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "With the new trend of multi-generational family travel, Prima offers support to tourists wishing to visit the coast or other parts of the country and have special needs.",
-        "Services would involve equipment hire like wheelchairs, companion care, doctor visits and appointments. Services extend to both adults and children.",
-      ],
-    },
-    "Recuperative Care": {
-      title: "Recuperative Care",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "In conjunction with our accomodation partners, we offer care to those would like to be cared for in a homely environment while they recuperate from surgery or illness.",
-        "With our partners who extend throughout the country, our team caters to all the medical support you would require.",
-        "Our hospital referral partners provide the necessary support in case of any emergencies or if incidents occur.",
-      ],
-    },
-    "Kwaheri Services": {
-      title: "Kwaheri Services",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "For many of our clients, the end of life is a reality that they have to face. We offer compassionate end of life care in the comfort of your home. As well as support and care for loved ones through this difficult time.",
-        "This becomes especially important for clients whose family may live away or who'd appreciate having all logistics handled for them.",
-        "Our support extends to evacuation of the deceased, coordination with necessary authorities, autopsy and morgue services as well as final send off per the client's and family's wishes.",
-      ],
-    },
-    "Equipment Sales & Hire": {
-      title: "Equipment Sales & Hire",
-      imageA:
-        "https://images.unsplash.com/photo-1580281657521-6b5b7d2cbf5e?w=1200&q=60",
-      paragraphs: [
-        "We offer a wide range of medical equipment for sale and hire to support your care needs at home or in care facilities.",
-        "This includes mobility aids, hospital beds, and other essential equipment.",
-        "Our team can help you select the right equipment and provide delivery and setup services.",
-      ],
-    },
-  };
-
-  const buttonRefs = useRef([]);
-  const containerRef = useRef(null);
-  const trackRef = useRef(null);
-  const [buttonWidths, setButtonWidths] = useState([]);
-  const [positions, setPositions] = useState([]);
-  const [visibleWidth, setVisibleWidth] = useState(0);
-
-  const [offset, setOffset] = useState(0);
-  const [activeItem, setActiveItem] = useState(null);
-  const modalRef = useRef(null);
-
-  const gap = 32;
+function ProfileModal({ selectedTitle, onClose }) {
+  if (!selectedTitle) return null;
+  const c = details[selectedTitle];
 
   useEffect(() => {
-    const measure = () => {
-      const widths = buttonRefs.current.map((ref) =>
-        ref ? Math.round(ref.offsetWidth) : 0
-      );
-      setButtonWidths(widths);
-      const pos = buttonRefs.current.map((ref) =>
-        ref ? Math.round(ref.offsetLeft) : 0
-      );
-      setPositions(pos);
-      if (containerRef.current)
-        setVisibleWidth(Math.round(containerRef.current.clientWidth));
-    };
-    const t = setTimeout(measure, 0);
-    window.addEventListener("resize", measure);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("resize", measure);
-    };
-  }, [items]);
-
-  const totalWidth = trackRef.current
-    ? Math.round(trackRef.current.scrollWidth)
-    : buttonWidths.length
-    ? buttonWidths.reduce((a, b) => a + b, 0) + gap * (items.length - 1)
-    : 0;
-
-  const maxOffset = Math.max(totalWidth - visibleWidth, 0);
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-  const getIndexFromOffset = (off) => {
-    if (!positions.length) return 0;
-    for (let i = positions.length - 1; i >= 0; i--) {
-      if (positions[i] <= off + 1) return i;
-    }
-    return 0;
-  };
-
-  const scrollLeft = () => {
-    const idx = getIndexFromOffset(offset);
-    const newIdx = Math.max(idx - 1, 0);
-    const target = clamp(positions[newIdx] || 0, 0, maxOffset);
-    setOffset(target);
-  };
-
-  const scrollRight = () => {
-    const idx = getIndexFromOffset(offset);
-    const newIdx = Math.min(idx + 1, Math.max(0, items.length - 1));
-    const target = clamp(positions[newIdx] || 0, 0, maxOffset);
-    setOffset(target);
-  };
-
-  useEffect(() => {
-    setOffset((prev) => clamp(prev, 0, maxOffset));
-  }, [maxOffset]);
-
-  const trackJustifyClass =
-    totalWidth <= visibleWidth ? "justify-center" : "justify-start";
-
-  useEffect(() => {
-    if (activeItem) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [activeItem]);
-
-  const getContent = (name) => {
-    return details[name] || {
-      title: name,
-      imageA:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&q=60",
-      paragraphs: ["Description coming soon."],
-    };
-  };
-
-  const handleLearnMore = () => {
-    setActiveItem(null);
-    navigate("/services#customer-support");
-  };
-
-const tolerance = 4; // pixels
-
-const leftDisabled = offset <= 0 + tolerance;
-const rightDisabled = offset >= maxOffset - tolerance;
-
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   return (
     <div
-      className="carousel-container w-full flex items-center justify-between px-8 py-2"
-      style={{ minHeight: "40px", paddingTop: "1px" }}
+      className="fixed inset-0 bg-black/60 z-50 overflow-y-auto"
+      onClick={onClose}
     >
-      <button
-        type="button"
-        onClick={scrollLeft}
-        disabled={leftDisabled}
-        className={`relative rounded-full w-6 h-6 shadow transition flex items-center justify-center ${
-          leftDisabled
-            ? "bg-neutral-800/30 text-neutral-400 cursor-not-allowed"
-            : "bg-neutral-900 hover:bg-neutral-800"
-        }`}
-        aria-label="Previous"
-      >
-        <ChevronLeft className={`w-3 h-3 ${leftDisabled ? "text-neutral-400" : "text-white"}`} />
-      </button>
-
       <div
-        ref={containerRef}
-        className={`flex-1 flex items-center ${trackJustifyClass} relative w-[80%] overflow-hidden h-12 mx-4`}
+        className="mx-auto my-6 w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+        style={{ maxHeight: "90vh" }}
       >
+        {/* Sticky header */}
+        <div className="sticky top-0 z-20 bg-white border-b p-4 flex items-center justify-between">
+          <h3 className="text-lg md:text-xl font-bold text-neutral-900">
+            {selectedTitle}
+          </h3>
+          <button
+            onClick={onClose}
+            className="px-3 py-1 rounded-full bg-red-600 text-white hover:bg-red-700"
+          >
+            Close
+          </button>
+        </div>
+
+        {/* Scrollable body */}
         <div
-          ref={trackRef}
-          className="flex transition-transform duration-200 ease-out"
-          style={{
-            gap: `${gap}px`,
-            width: "max-content",
-            transform: `translateX(-${offset}px)`,
-          }}
+          className="overflow-y-auto p-6"
+          style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
         >
-          {items.map((item, idx) => (
-            <button
-              type="button"
-              key={idx}
-              ref={(el) => (buttonRefs.current[idx] = el)}
-              onClick={() => setActiveItem(item)}
-              className="inline-flex items-center justify-center h-full gap-2 whitespace-nowrap px-6 rounded-full font-medium text-base bg-white text-neutral-700 hover:bg-red-500 hover:text-white shadow transition-colors duration-200 cursor-pointer"
+          <img
+            src={c.image}
+            alt={selectedTitle}
+            className="w-full h-56 md:h-72 object-cover rounded-lg mb-4"
+          />
+          <div className="space-y-4 text-neutral-700 text-sm md:text-base leading-relaxed">
+            {c.paragraphs.map((p, i) => (
+              <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ExpandWorkforce() {
+  const [selected, setSelected] = useState(null);
+  const [current, setCurrent] = useState(0);
+  const cardTitles = Object.keys(details);
+  const scrollRef = useRef(null);
+
+  const goTo = (index) => {
+    if (index < 0) index = cardTitles.length - 1;
+    if (index >= cardTitles.length) index = 0;
+    setCurrent(index);
+    const card = scrollRef.current?.children[index];
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", inline: "center" });
+    }
+  };
+
+  return (
+    <section className="px-4 md:px-8 py-10 max-w-6xl mx-auto pt-10"> {/* Padding-top for the section remains pt-10 */}
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">
+        Explore Our Services
+      </h2>
+      <p className="text-sm text-neutral-600 mb-6">
+        Tap a card to open detailed info. The popup is scrollable on small screens.
+      </p>
+
+      {/* cards track */}
+      <div
+        ref={scrollRef}
+        className="flex gap-6 pb-4 no-scrollbar"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overflowX: "hidden",  // Ensures no horizontal scroll
+          paddingTop: "10px",   // Added padding-top specifically to the cards container to ensure visibility
+        }}
+      >
+        {cardTitles.map((title) => {
+          const item = details[title];
+          return (
+            <article
+              key={title}
+              onClick={() => setSelected(title)}
+              className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[30%] bg-white rounded-2xl shadow-sm p-5 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:ring-1 hover:ring-red-400 hover:scale-[1.02] transition"
             >
-              {item}
-              <ChevronDown className="w-4 h-4 opacity-70" />
-            </button>
-          ))}
+              <img
+                src={item.image}
+                alt={title}
+                className="w-full h-40 object-cover rounded-lg mb-4"
+              />
+              <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
+              <p className="text-sm text-neutral-600 line-clamp-3 mt-2">
+                {item.paragraphs[0].replace(/<[^>]+>/g, "")}
+              </p>
+              <div className="mt-4 text-right text-red-600 font-semibold">
+                Learn more →
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {/* Carousel navigation */}
+      <div className="w-full max-w-6xl flex items-center justify-between px-4 sm:px-6 md:px-8 mt-4">
+        <div>
+          <button
+            onClick={() => goTo(current - 1)}
+            className="bg-neutral-200 rounded-full p-2 shadow hover:bg-neutral-300 transition flex items-center justify-center"
+            aria-label="Previous"
+          >
+            <ArrowRight className="text-neutral-700" direction="left" />
+          </button>
+        </div>
+
+        <div className="flex-1 flex justify-center items-center">
+          <div className="flex gap-2">
+            {cardTitles.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => goTo(idx)}
+                className={`transition-all duration-300 rounded-full ${
+                  idx === current
+                    ? "bg-red-600 w-4 h-1.5"
+                    : "bg-neutral-300 w-2 h-1"
+                }`}
+                style={{
+                  boxShadow: idx === current ? "0 2px 8px rgba(0,0,0,0.10)" : undefined,
+                  opacity: idx === current ? 1 : 0.7,
+                }}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <button
+            onClick={() => goTo(current + 1)}
+            className="bg-neutral-900 rounded-full p-2 shadow hover:bg-neutral-800 transition flex items-center justify-center"
+            aria-label="Next"
+          >
+            <ArrowRight className="text-white" direction="right" />
+          </button>
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={scrollRight}
-        disabled={rightDisabled}
-        className={`relative rounded-full w-6 h-6 shadow transition flex items-center justify-center ${
-          rightDisabled
-            ? "bg-neutral-800/30 text-neutral-400 cursor-not-allowed"
-            : "bg-neutral-900 hover:bg-neutral-800"
-        }`}
-        aria-label="Next"
-      >
-        <ChevronRight
-          className={`w-3 h-3 ${rightDisabled ? "text-neutral-400" : "text-white"}`}
-        />
-      </button>
-
-      {activeItem && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-4"
-          onClick={() => setActiveItem(null)}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div
-            ref={modalRef}
-            className="bg-white rounded-lg shadow-xl relative w-full max-w-[880px] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-            style={{ borderRadius: "14px" }}
-          >
-            <button
-              onClick={() => setActiveItem(null)}
-              className="absolute right-4 top-4 p-1 rounded-full hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-300 z-20"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5 text-neutral-700" />
-            </button>
-
-            {(() => {
-              const c = getContent(activeItem);
-              return (
-                <div className="flex flex-col md:flex-row">
-                  {/* Left image only */}
-                  <div className="relative md:w-1/2 w-full flex items-center justify-center bg-white p-6">
-                    <div
-                      className="absolute left-0 top-1/4 h-24 md:h-40 bg-red-600"
-                      style={{ width: "38%", transform: "translateX(-20%)" }}
-                      aria-hidden
-                    />
-                    <div className="relative z-10 w-[55%] md:w-[48%]">
-                      <img
-                        src={c.imageA}
-                        alt={`${c.title} main`}
-                        className="w-full h-[260px] md:h-[320px] object-cover rounded-sm shadow-sm"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right column text */}
-                  <div className="md:w-1/2 w-full p-8 flex flex-col justify-start">
-                    <div>
-                      <h2 className="text-3xl md:text-4xl font-bold leading-tight text-neutral-900">
-                        {c.title}
-                      </h2>
-                      <div className="mt-3 flex items-center gap-2">
-                        <div className="h-2 w-28 bg-red-600 rounded-sm" />
-                        <div className="h-2 w-6 bg-red-600 rounded-sm" />
-                        <div className="h-2 w-6 bg-red-600 rounded-sm opacity-60" />
-                        <div className="h-2 w-6 bg-red-600 rounded-sm opacity-40" />
-                      </div>
-                    </div>
-
-                    <div className="mt-6 space-y-4 text-neutral-700 leading-relaxed text-sm md:text-base">
-                      {c.paragraphs.map((p, i) => (
-                        <p key={i}>{p}</p>
-                      ))}
-                    </div>
-
-                    <div className="mt-6">
-                      <button
-                        type="button"
-                        onClick={handleLearnMore}
-                        className="inline-flex items-center rounded-full bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                      >
-                        Learn More
-                        <ArrowUpRight className="text-neutral-950 ml-2" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        </div>
-      )}
-    </div>
+      {/* modal */}
+      <ProfileModal
+        selectedTitle={selected}
+        onClose={() => setSelected(null)}
+      />
+    </section>
   );
 }
