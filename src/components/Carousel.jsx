@@ -148,7 +148,7 @@ function ProfileModal({ selectedTitle, onClose }) {
   );
 }
 
-export default function ExpandWorkforce() {
+export default function Carousel() {
   const [selected, setSelected] = useState(null);
   const [current, setCurrent] = useState(0);
   const cardTitles = Object.keys(details);
@@ -160,17 +160,21 @@ export default function ExpandWorkforce() {
     setCurrent(index);
     const card = scrollRef.current?.children[index];
     if (card) {
-      card.scrollIntoView({ behavior: "smooth", inline: "center" });
+      card.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest", // ✅ prevents vertical jumps
+      });
     }
   };
 
   return (
-    <section className="px-4 md:px-8 py-10 max-w-6xl mx-auto pt-10"> {/* Padding-top for the section remains pt-10 */}
+    <section className="px-4 md:px-8 py-10 max-w-6xl mx-auto pt-10">
       <h2 className="text-2xl md:text-3xl font-bold mb-4">
         Explore Our Services
       </h2>
       <p className="text-sm text-neutral-600 mb-6">
-        Tap a card to open detailed info. The popup is scrollable on small screens.
+        Find a service that works for you and your loved ones.
       </p>
 
       {/* cards track */}
@@ -179,8 +183,8 @@ export default function ExpandWorkforce() {
         className="flex gap-6 pb-4 no-scrollbar"
         style={{
           WebkitOverflowScrolling: "touch",
-          overflowX: "hidden",  // Ensures no horizontal scroll
-          paddingTop: "10px",   // Added padding-top specifically to the cards container to ensure visibility
+          overflowX: "hidden",
+          paddingTop: "10px",
         }}
       >
         {cardTitles.map((title) => {
